@@ -66,7 +66,7 @@ class Trie {
             node = node.children[char] ?: return emptyList()
         }
         // Collect all cities associated with the last node and its descendants
-        return collectAllWords(node)
+        return collectAllWords(node).sortedWith(compareBy({ it.name }, { it.country }))
     }
 
 
