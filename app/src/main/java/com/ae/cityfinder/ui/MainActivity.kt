@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize city adapter with empty list
         cityAdapter = CityAdapter(emptyList()) { city ->
-            val gmmIntentUri = Uri.parse("geo:${city.coord.lat},${city.coord.lon}?q=${city.name}")
+            val gmmIntentUri = Uri.parse("geo:${city.coord.lat},${city.coord.lon}?q=${city.coord.lat},${city.coord.lon}(${city.name})")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.cities.observe(this, Observer { cities ->
             // Update adapter with new list of cities
             cityAdapter = CityAdapter(cities) { city ->
-                val gmmIntentUri = Uri.parse("geo:${city.coord.lat},${city.coord.lon}?q=${city.name}")
+                val gmmIntentUri = Uri.parse("geo:${city.coord.lat},${city.coord.lon}?q=${city.coord.lat},${city.coord.lon}(${city.name})")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)
