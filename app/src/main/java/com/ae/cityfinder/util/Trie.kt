@@ -9,8 +9,10 @@ class Trie {
     private class TrieNode {
         // Maps each character to its corresponding child node
         val children: MutableMap<Char, TrieNode> = mutableMapOf()
+
         // Flag to indicate if the node represents the end of a word
         var isEndOfWord: Boolean = false
+
         // Reference to the City object associated with the word
         var city: City? = null
     }
@@ -35,8 +37,18 @@ class Trie {
         }
         // Marks the last node as the end of a word and sets the associated city
         node.isEndOfWord = true
-        // Set the city associated with the last node
-        node.city = city
+
+        // If the last node already has a city, append the new city to the linked list
+        if (node.city == null) {
+            node.city = city
+        } else {
+            var current = node.city
+            while (current?.nextCity != null) {
+                current = current.nextCity
+            }
+            current?.nextCity = city
+
+        }
     }
 
     /**
@@ -50,6 +62,7 @@ class Trie {
         // Traverse the Trie to find the last node corresponding to the prefix
         for (char in prefix) {
             // If the character is not found in the Trie, return an empty list
+            //  the
             node = node.children[char] ?: return emptyList()
         }
         // Collect all cities associated with the last node and its descendants
@@ -67,8 +80,11 @@ class Trie {
         val cities = mutableListOf<City>()
         // If the node is a word, add it to the list
         if (node.isEndOfWord) {
-            // Add the city associated with the word
-            node.city?.let { cities.add(it) }
+            var current = node.city
+            while (current != null) {
+                cities.add(current)
+                current = current.nextCity
+            }
         }
         // Recursively collect cities from child nodes
         for (child in node.children.values) {
