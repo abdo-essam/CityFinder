@@ -19,3 +19,12 @@ The Trie (prefix tree) data structure is used to optimize the search functionali
 Why Trie?
 - Efficient Searches: The search time complexity is O(m), where m is the length of the search prefix.
 - Memory Usage: The Trie is space-efficient as common prefixes are stored once.
+
+## Screenshots
+<table>
+  <tr>
+    <td><img src="https://github.com/abdo-essam/Wallpapers/blob/master/screenshots/1.jpg" width="250"></td>
+    <td><img src="https://github.com/abdo-essam/Wallpapers/blob/master/screenshots/2.jpg" width="250"></td>
+    <td><img src="https://github.com/abdo-essam/Wallpapers/blob/master/screenshots/3.jpg" width="250"></td>
+  </tr>
+</table>
