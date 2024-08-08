@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">CityFinder</string>
-    <string name="search_cities">Search Cities</string>
+    <string name="search_cities">Search Your City</string>
 </resources>

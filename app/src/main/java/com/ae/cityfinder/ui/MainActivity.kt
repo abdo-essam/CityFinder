@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ae.cityfinder.R
 import com.ae.cityfinder.ui.adapter.CityAdapter
 import com.ae.cityfinder.viewmodel.CityViewModel
+import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: CityViewModel
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         )[CityViewModel::class.java]
 
         val cityRecyclerView: RecyclerView = findViewById(R.id.cityRecyclerView)
-        val searchEditText: EditText = findViewById(R.id.searchEditText)
+        val textField: TextInputLayout = findViewById(R.id.textField)
 
         // Initialize city adapter with empty list
         cityAdapter = CityAdapter(emptyList()) { city ->
@@ -54,15 +56,8 @@ class MainActivity : AppCompatActivity() {
             cityRecyclerView.adapter = cityAdapter
         })
 
-        // Add text watcher to listen for changes in the search edit text
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.filterCities(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        textField.editText?.addTextChangedListener { text ->
+            viewModel.filterCities(text.toString())
+        }
     }
 }
